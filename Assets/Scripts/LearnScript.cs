@@ -15,6 +15,10 @@ public class LearnScript : MonoBehaviour
     private bool Nut;
     private int Porcupine;
     private bool PorcupineBool;
+    private bool Pumpkin;
+    private int PumpkinCounter;
+    private bool End;
+
     private void Start()
     {
         hurt = false;
@@ -30,6 +34,9 @@ public class LearnScript : MonoBehaviour
         Nut = false;
         Porcupine = 0;
         PorcupineBool = false;
+        Pumpkin = false;
+        PumpkinCounter = 0;
+        End = false;
         
     }
     private void Update()
@@ -82,6 +89,16 @@ public class LearnScript : MonoBehaviour
                     Porcupine = 1;
                     cutSceneScript.StartCutScene(2);
                 }
+                else if (Porcupine == 1)
+                {
+                    cutSceneScript.StartDialogue(15);
+                    StartCoroutine(StopGo(2));
+                }
+                else if (Porcupine == 2)
+                {
+                    cutSceneScript.StartDialogue(16);
+                    StartCoroutine(StopGo(11));
+                }
             }
         }
         if (canTake && Input.GetKeyDown(KeyCode.E))
@@ -91,8 +108,16 @@ public class LearnScript : MonoBehaviour
                 Squirrel = 3;
                 Destroy(NutGO);
             }
+            if (Pumpkin)
+            {
+                PumpkinCounter++;
+                Destroy(CurrentPumpkin);
+                if(PumpkinCounter == 5)
+                {
+                    Porcupine = 2;
+                }
+            }
         }
-        
 
         if (canTalk && !cutSceneScript.isCutScene) cutSceneScript.StartDialogue(5);
         if (canTake && !cutSceneScript.isCutScene) cutSceneScript.StartDialogue(6);
@@ -100,6 +125,7 @@ public class LearnScript : MonoBehaviour
     }
     [SerializeField] private GameObject NutGO;
     [SerializeField] private CutSceneScript cutSceneScript;
+    private GameObject CurrentPumpkin;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("LearnHurt") && !hurt) hurt = true;
@@ -116,8 +142,14 @@ public class LearnScript : MonoBehaviour
             canTake = true;
         }
         if (collision.CompareTag("Nut")) Nut = true;
+        if (collision.CompareTag("Pumpkin"))
+        {
+            Pumpkin = true;
+            CurrentPumpkin = collision.gameObject;
+        }
         if (collision.CompareTag("Squirrel1")) SquirrelBool = true;
         if (collision.CompareTag("Porcupine")) PorcupineBool = true;
+        if (collision.CompareTag("End")) cutSceneScript.StartCutScene(3);
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -134,6 +166,7 @@ public class LearnScript : MonoBehaviour
         if (collision.CompareTag("Squirrel1")) SquirrelBool = false;
         if (collision.CompareTag("Porcupine")) PorcupineBool = false;
         if (collision.CompareTag("Nut")) Nut = false;
+        if (collision.CompareTag("Pumpkin")) Pumpkin = false;
     }
     IEnumerator StopGo(float sec)
     {

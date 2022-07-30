@@ -6,19 +6,16 @@ using UnityEngine.UI;
 public class FoxHealthScript : MonoBehaviour
 {
     [SerializeField] private float maxHealth;
-    [SerializeField] private float maxLuck;
     [SerializeField] private Animator foxAnim;
     [SerializeField] private Image HealthBar;
-    [SerializeField] private Image luckBar;
+
     private float currentHealth;
-    private float currentLuck;
     private Rigidbody2D rb;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
-        currentLuck = 50;
         timeToDamage = true;
     }
 
@@ -28,11 +25,10 @@ public class FoxHealthScript : MonoBehaviour
         {
             foxAnim.SetTrigger("Fear");
             rb.velocity = new Vector2(5, 5);
-            AddLuck(-5);
         }
         if (collision.CompareTag("Hedgehog"))
         {
-            TakeDamage(5);
+            TakeDamage(10);
         }
     }
     public void TakeDamage(float damage)
@@ -41,36 +37,17 @@ public class FoxHealthScript : MonoBehaviour
         {
             foxAnim.SetTrigger("Fear");
             rb.velocity = new Vector2(6, 5);
-            if (Random.Range(0, 100) > currentLuck)
-            {
-                currentHealth -= damage;
-            }
-            else
-            {
-                currentLuck -= damage;
-            }
+            currentHealth -= damage;
             UpdateHealth();
-            UpdateLuck();
             StartCoroutine("NewDamage");
+
         }
     }
     private void UpdateHealth()
     {
         HealthBar.fillAmount = currentHealth / maxHealth;
     }
-    public void UpdateLuck()
-    {
-        luckBar.fillAmount = currentLuck / maxLuck;
-    }
-    public void AddLuck(float luck)
-    {
-        if (timeToDamage)
-        {
-            currentLuck += luck;
-            UpdateLuck();
-            StartCoroutine("NewDamage");
-        }
-    }
+    
     private bool timeToDamage;
     IEnumerator NewDamage()
     {

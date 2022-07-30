@@ -17,6 +17,8 @@ TagManager:
   - Nut
   - CanTake
   - Porcupine
+  - Pumpkin
+  - End
   layers:
   - Default
   - TransparentFX

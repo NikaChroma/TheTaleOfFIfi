@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class CutSceneScript : MonoBehaviour
 {
@@ -61,10 +62,19 @@ public class CutSceneScript : MonoBehaviour
     }
     public void SkipScene()
     {
+        if(numCutScene == 3)
+        {
+            Ending(1);
+        }
         CutScenes[numCutScene].time = CutScenes[numCutScene].playableAsset.duration;
         CutScenes[numCutScene].Evaluate();
         CutScenes[numCutScene].Stop();
         StopCutScene();
         StartDialogue(13);
+    }
+    public void Ending(int n)
+    {
+        PlayerPrefs.SetInt("NewEnd", n);
+        SceneManager.LoadScene(0);
     }
 }
