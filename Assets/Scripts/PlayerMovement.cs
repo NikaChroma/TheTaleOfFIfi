@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Animator foxAnim;
     [SerializeField] private Transform GroundColliderTransform;
+    [SerializeField] private FoxHealthScript foxHealthScript;
 
     private void Start()
     {

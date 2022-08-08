@@ -23,6 +23,7 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.IK.Editor.dll:
     - UnityEditor.U2D.IK.IKEditorManager
+    - UnityEditor.U2D.IK.IKGizmos
     Unity.2D.IK.Runtime.dll:
     - UnityEditor.U2D.IK.IKEditorManagerHelper
     Unity.2D.Tilemap.Editor.dll:
@@ -39,6 +40,8 @@ ScriptsOnlyBuild:
     - TimelinePreferences
     - UnityEditor.Timeline.EditorClip
     - UnityEditor.Timeline.SequenceHierarchy
+    - UnityEditor.Timeline.Signals.SignalEmitterInspector
+    - UnityEditor.Timeline.Signals.SignalReceiverInspector
     - UnityEditor.Timeline.TimelineAssetViewModel
     - UnityEditor.Timeline.TimelineWindow
     Unity.Timeline.dll:
@@ -312,19 +315,13 @@ ScriptsOnlyBuild:
     className: TMP_InputField
   - hash:
       serializedVersion: 2
-      Hash: 27b1590f5fed2c3636ac627b082c67f7
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: HealthScript
-  - hash:
-      serializedVersion: 2
       Hash: 71b711096c6c32621c1d4c02310898b7
     assemblyName: Unity.2D.Animation.Runtime.dll
     namespaceName: UnityEngine.U2D.Animation
     className: SpriteSkin
   - hash:
       serializedVersion: 2
-      Hash: 75e181abdd0c54713a5f4fb61618a58a
+      Hash: 75fa22a93324ca6db58e903bb98b956b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FoxHealthScript
@@ -426,7 +423,7 @@ ScriptsOnlyBuild:
     className: CinemachineCollider
   - hash:
       serializedVersion: 2
-      Hash: 56b165f03e029d14f79c585aa44c766f
+      Hash: b4a01d40969579c7abf0513e63d8239d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerMovement

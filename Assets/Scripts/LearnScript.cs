@@ -17,7 +17,6 @@ public class LearnScript : MonoBehaviour
     private bool PorcupineBool;
     private bool Pumpkin;
     private int PumpkinCounter;
-    private bool End;
 
     private void Start()
     {
@@ -36,7 +35,6 @@ public class LearnScript : MonoBehaviour
         PorcupineBool = false;
         Pumpkin = false;
         PumpkinCounter = 0;
-        End = false;
         
     }
     private void Update()
@@ -98,7 +96,8 @@ public class LearnScript : MonoBehaviour
                 {
                     cutSceneScript.StartDialogue(16);
                     StartCoroutine(StopGo(11));
-                }
+                    Porcupine = 3;
+                } 
             }
         }
         if (canTake && Input.GetKeyDown(KeyCode.E))
@@ -173,5 +172,53 @@ public class LearnScript : MonoBehaviour
         cutSceneScript.isCutScene = true;
         yield return new WaitForSeconds(sec);
         cutSceneScript.isCutScene = false;
+    }
+    public void SelectEnding()
+    {
+        if (Squirrel == 3)
+        {
+            if (Porcupine == 0)
+            {
+                cutSceneScript.StartDialogue(18);
+            }
+            else if (Porcupine == 3)
+            {
+                cutSceneScript.StartDialogue(19);
+            }
+            else
+            {
+                cutSceneScript.StartDialogue(17);
+            }
+        }
+        else if (Squirrel == 0)
+        {
+            if (Porcupine == 0)
+            {
+                cutSceneScript.StartDialogue(20);
+            }
+            else if (Porcupine == 3)
+            {
+                cutSceneScript.StartDialogue(21);
+            }
+            else
+            {
+                cutSceneScript.StartDialogue(20);
+            }
+        }
+        else
+        {
+            if (Porcupine == 0)
+            {
+                cutSceneScript.StartDialogue(18);
+            }
+            else if (Porcupine == 3)
+            {
+                cutSceneScript.StartDialogue(21);
+            }
+            else
+            {
+                cutSceneScript.StartDialogue(22);
+            }
+        }
     }
 }

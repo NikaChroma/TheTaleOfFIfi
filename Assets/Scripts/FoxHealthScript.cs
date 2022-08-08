@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FoxHealthScript : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class FoxHealthScript : MonoBehaviour
 
     private void Start()
     {
+        Death.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         timeToDamage = true;
@@ -28,7 +30,7 @@ public class FoxHealthScript : MonoBehaviour
         }
         if (collision.CompareTag("Hedgehog"))
         {
-            TakeDamage(10);
+            TakeDamage(25);
         }
     }
     public void TakeDamage(float damage)
@@ -46,6 +48,11 @@ public class FoxHealthScript : MonoBehaviour
     private void UpdateHealth()
     {
         HealthBar.fillAmount = currentHealth / maxHealth;
+        if(currentHealth <= 0)
+        {
+            Death.SetActive(true);
+            StartCoroutine("DeathTime");
+        }
     }
     
     private bool timeToDamage;
@@ -54,5 +61,11 @@ public class FoxHealthScript : MonoBehaviour
         timeToDamage = false;
         yield return new WaitForSeconds(1);
         timeToDamage = true;
+    }
+    [SerializeField] private GameObject Death;
+    IEnumerator DeathTime()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(0);
     }
 }

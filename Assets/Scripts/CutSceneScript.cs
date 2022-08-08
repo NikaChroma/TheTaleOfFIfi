@@ -64,7 +64,7 @@ public class CutSceneScript : MonoBehaviour
     {
         if(numCutScene == 3)
         {
-            Ending(1);
+            Ending();
         }
         CutScenes[numCutScene].time = CutScenes[numCutScene].playableAsset.duration;
         CutScenes[numCutScene].Evaluate();
@@ -72,9 +72,8 @@ public class CutSceneScript : MonoBehaviour
         StopCutScene();
         StartDialogue(13);
     }
-    public void Ending(int n)
+    public void Ending()
     {
-        PlayerPrefs.SetInt("NewEnd", n);
         SceneManager.LoadScene(0);
     }
 }

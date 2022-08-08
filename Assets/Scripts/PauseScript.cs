@@ -34,6 +34,7 @@ public class PauseScript : MonoBehaviour
 
     public void Exit()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
 }
